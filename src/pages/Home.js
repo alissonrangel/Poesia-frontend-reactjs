@@ -37,7 +37,7 @@ function Home() {
           
         <li key={k}>
           <div className="itemImage">
-            <img src={ i.featured_image} alt="" />          
+            <img src={ `${process.env.REACT_APP_URL_NAME}${i.key}`} alt="" />          
           </div>
           <div>Autor: {i.user}</div>
           <div className="itemName">{i.title}</div>
