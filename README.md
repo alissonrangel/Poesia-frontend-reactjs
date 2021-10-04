@@ -6,4 +6,5 @@
   * Projeto Frontend feito com o React
   * Uso do react-router-dom para criação das rotas
   * Projeto Backend feito com Ruby on Rails
+    - [Poesia backend](https://github.com/alissonrangel/Poesia-api-rails)
   * Hospedagens das fotos no Google Cloud Storage
