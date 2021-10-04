@@ -64,22 +64,18 @@ const apiFetchPost = async (endpoint, body) => {
 
   return json;
 }
-const apiFetchPut = async (endpoint, body) => {
+const apiFetchPut = async (endpoint, body, id) => {
 
-  if (!body.token){
-    let token = Cookies.get('token');
-    if(token){
-      body.token = token;
-    }
-  }
+  let token = Cookies.get('token');
 
-  const res = await fetch(BASEAPI+endpoint, {
+  const res = await fetch(`${BASEAPI+endpoint}${id}`, {
     method: 'PUT',
     headers:{
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      // 'Accept': 'application/json',
+      // 'Content-Type': 'application/json',
+      'Authorization': token 
     },
-    body:JSON.stringify(body)
+    body
   });
 
   const json = await res.json();
@@ -93,45 +89,77 @@ const apiFetchPut = async (endpoint, body) => {
 }
 const apiFetchGet = async (endpoint, body = []) => {
 
-  if (!body.token){
-    let token = Cookies.get('token');
-    if(token){
-      body.token = token;
-    }
-  }
+  // if (!body.token){
+  //   let token = Cookies.get('token');
+  //   if(token){
+  //     body.token = token;
+  //   }
+  // }
 
   const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(body)}`); 
 
   const json = await res.json();
 
-  if ( json.notallowed) {
-    window.location.href = '/signin';
-    return;
-  }
+  // if ( json.notallowed) {
+  //   window.location.href = '/signin';
+  //   return;
+  // }
 
   return json;
 }
-const apiFetchGet1 = async (endpoint, body = []) => {
+const apiFetchGet1 = async (endpoint, id) => {
 
-  if (!body.token){
-    let token = Cookies.get('token');
-    if(token){
-      body.token = token;
-    }
-  }
-
-  console.log(`XXXXXXXXXX - ${endpoint}`);
+  // if (!body.token){
+  //   let token = Cookies.get('token');
+  //   if(token){
+  //     body.token = token;
+  //   }
+  // }
+  console.log(`XXXXXXXXXX - ${BASEAPI+endpoint}${id.id}`);
   
+  // let idd = parseInt(id);
 
-  const res = await fetch(`${BASEAPI+endpoint}`); 
+  console.log(`XXXXXXXXXX - ${BASEAPI+endpoint}${id.id}`);
+
+  const res = await fetch(`${BASEAPI+endpoint}${id.id}`); 
 
   const json = await res.json();
 
-  if ( json.notallowed) {
-    window.location.href = '/signin';
-    return;
-  }
+  // if ( json.notallowed) {
+  //   window.location.href = '/signin';
+  //   return;
+  // }  
+
   console.log(json);
+
+  return json;
+}
+
+const apiFetchGet2 = async (endpoint, tok) => {
+
+  if (tok != 0){
+        
+  } else {
+
+  }
+  console.log("TOKENNNNNN : "+tok);
+  
+
+  const res = await fetch(`${BASEAPI+endpoint}`,{
+      headers:{
+        // 'Accept': 'application/json',
+        // 'Content-Type': 'application/json',
+        'Authorization': tok 
+      }
+    }
+  ); 
+
+  const json = await res.json();
+
+  // if ( json.notallowed) {
+  //   window.location.href = '/signin';
+  //   return;
+  // }
 
   return json;
 }
@@ -193,32 +221,79 @@ const SiteAPI = {
     return json;
   },
 
-  getAd: async (id, other = false) => {
-    const json = await apiFetchGet(
-      '/ad/item',
-      {id, other}
+  getUser: async () => {
+
+    let token = Cookies.get('token');
+    
+    console.log(token);
+    
+    if(token){
+      console.log("Entrou aqui");
+      //fData.append('Authorization', token);
+    } else {
+      console.log("Sem token");
+      token = 0
+      return;
+    }
+
+    const json = await apiFetchGet2(
+      '/me',
+      token
+    );
+    return json;
+  },
+
+  getPoetry: async (id) => {
+    const json = await apiFetchGet1(
+      '/poetries/',
+      {id}
     );
     return json;
   },
 
   addPoetry: async (fData) => {
     
-    // let token = Cookies.get('token');
+    let token = Cookies.get('token');
     
-    // console.log(token);
+    console.log(token);
     
-    // if(token){
-    //   console.log("Entrou aqui");
-      
-    //   fData.append('Authorization', token);
-    // } else {
-    //   console.log("Sem token");
-    //   return;
-    // }
+    if(token){
+      console.log("Entrou aqui");
+      //fData.append('Authorization', token);
+    } else {
+      console.log("Sem token");
+      return;
+    }
+    console.log(`${fData.title} + ${fData.body}`);
 
     const json = await apiFetchFile(
       '/poetries',
       fData
+    );
+    return json;
+  },
+
+  poetryUpdate: async (fData, id)=>{
+    
+    let token = Cookies.get('token');
+    console.log("akçmlkklxmdlknslkfnsdlml " + id);
+    if(token){
+      console.log("Entrou aqui 00");
+      //fData.append('Authorization', token);
+    } else {
+      console.log("Sem token 00");
+      return;
+    }
+
+    //console.log(`${fData.title} + ${fData.body} + ${fData.user_id}`);
+    
+
+    //return { error: "326"};
+    
+    const json = await apiFetchPut(
+      '/poetries/',
+      fData,
+      id
     );
     return json;
   }

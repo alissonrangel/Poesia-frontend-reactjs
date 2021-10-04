@@ -1,0 +1,55 @@
+ul{
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+li{
+  box-sizing: border-box;
+}
+.pre_home{
+  width: 100%;  
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif !important;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  direction: ltr;
+  color: #000 !important;
+}
+
+.pre_poetry_page{
+  width: 100%;  
+  text-align: center;
+  /* font-family: Arial, Helvetica, sans-serif !important; */
+  white-space: wrap;  
+  color: #444 !important;
+}
+
+
+@media (max-width: 575.98px) { 
+  li{
+    width: 90% !important;
+  }
+}
+
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+  li{
+    width: 45% !important;
+  }
+}
+
+
+@media (min-width: 768px) and (max-width: 1199.98px) { 
+  li{
+    width: 30% !important;
+  }
+ }
+
+
+ @media (min-width: 1200px) { 
+  li{
+    width: 23% !important;
+  }
+}

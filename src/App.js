@@ -2,7 +2,9 @@ import './App.css';
 import  {BrowserRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import EditPoetry from './pages/EditPoetry';
 import AdPoetry from './pages/AdPoetry';
+import PoetryPage from './pages/PoetryPage';
 import Home from './pages/Home';
 import { isLogged, doLogout } from './helpers/AuthHandler';
 
@@ -26,32 +28,40 @@ function App() {
     <BrowserRouter>
         <header>
           <h1>Meu site legal</h1>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/" >Home</Link>
-              </li>
-              { !logged &&
-              <>            
-                <li>
-                  <Link to="/signin" >Login</Link>
-                </li>  
-                <li>
-                  <Link to="/signup" >Cadastrar</Link>
-                </li>
-              </>
-              }
-              { logged && 
-              <>  
-                <li>
-                  <Link to="/addpoetry" >Adicionar Poesia</Link>
-                </li>                                        
-                <li>
-                  <button onClick={handleLogout}>Sair</button>
-                </li>
-              </>
-              }
-            </ul>
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container-fluid">
+              {/* <a class="navbar-brand" href="#">Navbar</a> */}
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li className="nav-item">
+                    <Link className="navbar-brand btn btn--dark" to="/" >Home</Link>
+                  </li>                  
+                  { !logged &&
+                  <>            
+                    <li className="nav-item">
+                      <Link className="btn btn--dark" to="/signin" >Login</Link>
+                    </li>  
+                    <li className="nav-item">
+                      <Link className="btn btn--dark" to="/signup" >Cadastrar</Link>
+                    </li>
+                  </>
+                  }
+                  { logged && 
+                  <>  
+                    <li>
+                      <Link className="btn btn--dark" to="/addpoetry" >Adicionar Poesia</Link>
+                    </li>                                        
+                    <li>
+                      <button className="btn btn--dark" onClick={handleLogout}>Sair</button>
+                    </li>
+                  </>
+                  }
+                </ul>
+              </div>
+            </div>
           </nav>
         </header>
         <hr/>
@@ -65,6 +75,15 @@ function App() {
           <Route path="/signup">
             <SignUp />
           </Route>
+          <Route path="/poetries/:item">
+            <PoetryPage />              
+          </Route>
+          <PrivateRoute path="/updatepoetry/:item">
+            <EditPoetry />              
+          </PrivateRoute>
+          {/* <Route path="/poetries/:item">
+            <PoetryPage author={i.user} title={i.title} body={i.body} key={i.key} />              
+          </Route>   */}
           <PrivateRoute path="/addpoetry">
             <AdPoetry />
           </PrivateRoute>          
