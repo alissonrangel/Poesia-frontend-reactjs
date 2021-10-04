@@ -26,6 +26,14 @@ li{
   color: #444 !important;
 }
 
+.imagem{
+  justify-self: center;
+  align-self: center;
+  display: inline-block;
+  width: 50%;  
+  text-align: center;
+}
+
 
 @media (max-width: 575.98px) { 
   li{

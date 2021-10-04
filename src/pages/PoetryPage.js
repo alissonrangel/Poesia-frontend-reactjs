@@ -53,10 +53,10 @@ function PoetryPage(props) {
   // }, [])
 
   return (
-    <div className="container">
+    <div className="container d-flex" style={{flexDirection:"column"}}>
       <h4>Poesia</h4>
       { logged && userId == poetry.user_id &&
-        <button className="btn btn-sm btn-dark" onClick={()=>handleButton()} >Editar</button>      
+        <button className="btn btn-sm btn-dark w-25" onClick={()=>handleButton()} >Editar</button>      
       }
       {/* <div className="itemImage">
         <img src={ `${process.env.REACT_APP_URL_NAME}${poetry.key}`} alt="" />          
@@ -64,7 +64,8 @@ function PoetryPage(props) {
       {/* <div>Autor: {poetry.user_name}</div>
       <div className="poetryTitle">{poetry.title}</div>
       <pre className="poetryCorpo">{poetry.body}</pre> */}
-      {/* <img className="card-img-top" src={ `${process.env.REACT_APP_URL_NAME}${poetry.key}`} alt="" />                     */}
+      <br/>
+      <img className="imagem" src={ `${process.env.REACT_APP_URL_NAME}${poetry.key}`} alt="" />
       <div>Autor: {poetry.user_name}</div>
       <div className="card-title poetryTitle">{poetry.title}</div>
       <div><pre className="card-text pre_poetry_page">{poetry.body}</pre></div> 

@@ -34,7 +34,7 @@ function Home() {
       {
         lista.map((i,k)=>                  
         <li className="card p-2 m-2" key={k} >          
-          {/* <img className="card-img-top" src={ `${process.env.REACT_APP_URL_NAME}${i.key}`} alt="" />                     */}
+          <img className="card-img-top" src={ `${process.env.REACT_APP_URL_NAME}${i.key}`} alt="" />                    
           <div>Autor: {i.user}</div>
           <div className="card-title poetryTitle">{i.title}</div>
           <div><pre className="card-text pre_home">{i.body}</pre></div>
