@@ -20,6 +20,8 @@ function PoetryPage(props) {
   const [userId, setUserId] = useState(0);
   const [logged, setLogged] = useState(isLogged)
 
+  const [opcao,setOpcao] = useState("0")
+
   const getPoetry = async()=>{
     const json = await api.getPoetry(item);
     console.log("JSONFDFSDSDFSDF - " + json.user_name);
@@ -44,31 +46,51 @@ function PoetryPage(props) {
     }
   }
 
+  const handleOpcao = (op) => {
+    setOpcao(op);
+  }
+
   useEffect(async () => {
       await getPoetry();      
   }, []);
 
-  // useEffect(async() => {
-  //   await getUser()
-  // }, [])
+  useEffect(async() => {
+    let corpo_poetry_page = document.getElementById('corpo_poetry_page')
+
+    if (opcao == "0"){
+      corpo_poetry_page.classList.remove("pre_poetry_page_cursive");
+      corpo_poetry_page.classList.remove("pre_poetry_page_arial");
+      corpo_poetry_page.classList.add("pre_poetry_page_default");
+    } else if(opcao == "1"){
+      corpo_poetry_page.classList.remove("pre_poetry_page_default");
+      corpo_poetry_page.classList.remove("pre_poetry_page_arial");      
+      corpo_poetry_page.classList.add("pre_poetry_page_cursive");
+    } else if(opcao == "2"){
+      corpo_poetry_page.classList.remove("pre_poetry_page_cursive");
+      corpo_poetry_page.classList.remove("pre_poetry_page_default");      
+      corpo_poetry_page.classList.add("pre_poetry_page_arial");
+    }
+  }, [opcao])
 
   return (
     <div className="container d-flex" style={{flexDirection:"column"}}>
       <h4>Poesia</h4>
       { logged && userId == poetry.user_id &&
-        <button className="btn btn-sm btn-dark w-25" onClick={()=>handleButton()} >Editar</button>      
+        <button className="btn btn-sm btn-pink2 w-25" onClick={()=>handleButton()} >Editar</button>      
       }
-      {/* <div className="itemImage">
-        <img src={ `${process.env.REACT_APP_URL_NAME}${poetry.key}`} alt="" />          
-      </div> */}
-      {/* <div>Autor: {poetry.user_name}</div>
-      <div className="poetryTitle">{poetry.title}</div>
-      <pre className="poetryCorpo">{poetry.body}</pre> */}
       <br/>
-      <img className="imagem" src={ `${process.env.REACT_APP_URL_NAME}${poetry.key}`} alt="" />
-      <div>Autor: {poetry.user_name}</div>
-      <div className="card-title poetryTitle">{poetry.title}</div>
-      <div><pre className="card-text pre_poetry_page">{poetry.body}</pre></div> 
+      {/* <img className="imagem" src={ `${process.env.REACT_APP_URL_NAME}${poetry.key}`} alt="" /> */}
+      <div style={{display: "flex", justifyContent:"space-between"}}><h6><strong>Autor: {poetry.user_name}</strong></h6><h6>{poetry.data_criacao}</h6></div>
+      {/* <div>Autor: {poetry.user_name}</div> */}
+      <div className="card-title poetryTitle d-flex justify-content-center">{poetry.title}</div>
+      <div><pre id="corpo_poetry_page" className="card-text pre_poetry_page">{poetry.body}</pre></div> 
+      
+      <select className="mt-3 border-danger select_poetry_page" id="fontes" onChange={(e)=>handleOpcao(e.target.value)} >
+        <option></option>
+        <option value="0">Default</option>
+        <option value="1">Cursive</option>
+        <option value="2">Arial</option>
+      </select>      
     </div>
   )
 }

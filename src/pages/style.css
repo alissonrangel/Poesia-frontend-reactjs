@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+
+:root{
+  --bs-pink2: #e47068;
+}
+
+.btn-pink2{
+  color: #fff;
+  background-color: #e47068;
+  border-color: #e47068;
+}
+
+.btn-pink2:hover{
+  color: #e47068;
+  background-color: #fff;
+  border-color: #e47068;
+}
+
+
 ul{
   padding: 0;
   text-decoration: none;
@@ -18,12 +38,47 @@ li{
   color: #000 !important;
 }
 
+.pre_poetry_page_default{  
+  font-size: 14px;
+}
+
+.pre_poetry_page_cursive{
+  font-family: 'Dancing Script', cursive;
+  font-size: 21px;
+}
+
+.pre_poetry_page_arial{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
 .pre_poetry_page{
   width: 100%;  
   text-align: center;
-  /* font-family: Arial, Helvetica, sans-serif !important; */
+  /* font-size: 20px; */
+  color: #e47068;
   white-space: wrap;  
-  color: #444 !important;
+}
+
+.select_poetry_page{
+  border-radius:5px;
+  width: 100%;
+  padding: 10px;  
+}
+
+.select_poetry_page:focus, .select_poetry_page:hover{
+  border-radius:5px;
+  width: 100%;
+  padding: 10px;  
+  outline: var(--bs-danger);
+  box-shadow: 5px 5px 5px #e47068;
+}
+
+.poetryTitle{
+  margin: 20px 0;
+  font-size: 30px !important;
+  font-weight: bold;
+  color: var(--bs-pink2);
 }
 
 .imagem{
@@ -36,28 +91,28 @@ li{
 
 
 @media (max-width: 575.98px) { 
-  li{
+  .li_home{
     width: 90% !important;
   }
 }
 
 
 @media (min-width: 576px) and (max-width: 767.98px) { 
-  li{
+  .li_home{
     width: 45% !important;
   }
 }
 
 
 @media (min-width: 768px) and (max-width: 1199.98px) { 
-  li{
+  .li_home{
     width: 30% !important;
   }
  }
 
 
  @media (min-width: 1200px) { 
-  li{
+  .li_home{
     width: 23% !important;
   }
 }

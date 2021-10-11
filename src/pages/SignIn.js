@@ -96,16 +96,16 @@ const SignIn = () => {
 
   return (
     <PageContainer>
-      <PageTitle>Login</PageTitle>
-      <PageArea >
+      <PageTitle className="container">Login</PageTitle>
+      <PageArea className="container">
         {error &&
           <ErrorMessage>
             {error}
           </ErrorMessage>
         }
-        <Link to="/" >Voltar para a HOME</Link>
+        {/* <Link to="/" >Voltar para a HOME</Link> */}
 
-        <form onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
           <label className="area">
             <div className="area--title">E-mail</div>
             <div className="area--input">

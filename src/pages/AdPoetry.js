@@ -86,7 +86,17 @@ const AdPoetry = () => {
   const [featuredImage, setFeaturedImage] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState('');
+  const [userId, setUserId] = useState(0);
 
+  const getUser = async()=>{   
+    const json2 = await api.getUser()
+    console.log("XXXXXXXXXXXXX row " + json2.me + " ID : "+json2.me.id);
+    if (json2 == undefined){
+      setUserId(0)
+    } else {
+      setUserId(json2.me.id)
+    }
+  }
   // useEffect(()=>{
   //   const getCategories = async ()=>{
   //     const cats = await api.getCategories();
@@ -94,6 +104,9 @@ const AdPoetry = () => {
   //   }
   //   getCategories();
   // },[])
+  useEffect(async () => {
+    await getUser();      
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -111,7 +124,7 @@ const AdPoetry = () => {
 
     if ( errors.length === 0){
       const fData = new FormData();
-      fData.append('user_id', 2);
+      fData.append('user_id', userId);
       fData.append('title', title);
       fData.append('body', body);
       fData.append('featured_image', featuredImage);
@@ -151,7 +164,7 @@ const AdPoetry = () => {
 
   return (
     <PageContainer>
-      <PageTitle>Postar um anúncio</PageTitle>
+      <PageTitle>Postar uma Poesia</PageTitle>
       <PageArea >
         {error &&
           <ErrorMessage>

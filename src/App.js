@@ -7,6 +7,8 @@ import AdPoetry from './pages/AdPoetry';
 import PoetryPage from './pages/PoetryPage';
 import Home from './pages/Home';
 import { isLogged, doLogout } from './helpers/AuthHandler';
+import logo from "./assets/logo.png"
+import header from "./assets/aguadecoco.png"
 
 const handleLogout = () => {
   doLogout();
@@ -25,28 +27,28 @@ function App() {
   let logged = isLogged()
 
   return (
-    <BrowserRouter>
-        <header>
-          <h1>Meu site legal</h1>
-          <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="container-fluid">
+    <BrowserRouter >
+        <header className="container">
+        <img src={header} width="100%" alt="logo" />
+          <nav className="navbar navbar-expand-md navbar-light bg-light">
+            <div className="container-fluid">
               {/* <a class="navbar-brand" href="#">Navbar</a> */}
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+              <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav" style={{padding: "0", margin:"0", display:"flex"}}>                  
                   <li className="nav-item">
-                    <Link className="navbar-brand btn btn--dark" to="/" >Home</Link>
+                    <Link className="navbar-brand btn btn--dark" to="/" ><img src={logo} height="40px" alt="logo" /></Link>
                   </li>                  
                   { !logged &&
                   <>            
                     <li className="nav-item">
                       <Link className="btn btn--dark" to="/signin" >Login</Link>
                     </li>  
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <Link className="btn btn--dark" to="/signup" >Cadastrar</Link>
-                    </li>
+                    </li> */}
                   </>
                   }
                   { logged && 
@@ -64,7 +66,7 @@ function App() {
             </div>
           </nav>
         </header>
-        <hr/>
+        <hr className="container"/>
         <Switch>
           <Route exact path="/">
             <Home />
@@ -72,9 +74,9 @@ function App() {
           <Route path="/signin">
             <SignIn />
           </Route>
-          <Route path="/signup">
+          {/* <Route path="/signup">
             <SignUp />
-          </Route>
+          </Route> */}
           <Route path="/poetries/:item">
             <PoetryPage />              
           </Route>
@@ -91,8 +93,8 @@ function App() {
             <h4>Página não encontrada</h4>
           </Route>
         </Switch>
-        <hr/>
-        <footer>Todos os direitos reservados</footer>
+        <hr className="container"/>
+        <footer className="container"></footer>
       </BrowserRouter>
   );
 }

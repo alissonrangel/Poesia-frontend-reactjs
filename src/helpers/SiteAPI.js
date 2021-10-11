@@ -1,9 +1,9 @@
 import React, { useState , useEffect} from 'react';
 import Cookies from 'js-cookie';
 import qs from 'qs';
-import { async } from 'q';
 
 const BASEAPI = 'http://127.0.0.1:3000';
+
 const apiFetchFile = async (endpoint, body) => {
   
   let token = Cookies.get('token');
@@ -19,12 +19,12 @@ const apiFetchFile = async (endpoint, body) => {
   //}
   console.log("BODY>TOKEN2");
   console.log(token);
-  console.log(body.token);
+  console.log(body);
   
   const res = await fetch(BASEAPI+endpoint, {
     method: 'POST',    
     headers:{
-      'Authorization': body.token      
+      'Authorization': token      
     },
     body
   });
@@ -39,12 +39,12 @@ const apiFetchFile = async (endpoint, body) => {
 }
 const apiFetchPost = async (endpoint, body) => {
 
-  if (!body.token){
-    let token = Cookies.get('token');
-    if(token){
-      body.token = token;
-    }
-  }
+  // if (!body.token){
+  //   let token = Cookies.get('token');
+  //   if(token){
+  //     body.token = token;
+  //   }
+  // }
 
   const res = await fetch(BASEAPI+endpoint, {
     method: 'POST',
@@ -87,7 +87,7 @@ const apiFetchPut = async (endpoint, body, id) => {
 
   return json;
 }
-const apiFetchGet = async (endpoint, body = []) => {
+const apiFetchGet = async (endpoint) => {
 
   // if (!body.token){
   //   let token = Cookies.get('token');
@@ -96,7 +96,7 @@ const apiFetchGet = async (endpoint, body = []) => {
   //   }
   // }
 
-  const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(body)}`); 
+  const res = await fetch(`${BASEAPI+endpoint}`); 
 
   const json = await res.json();
 
@@ -200,19 +200,7 @@ const SiteAPI = {
     return json;
   },
 
-  getStates: async () => {
-    const json = await apiFetchGet(
-      '/states'
-    );
-    return json.states;
-  },
 
-  getCategories: async () => {
-    const json = await apiFetchGet(
-      '/categories'
-    );
-    return json.categories;
-  },
 
   getPoetries: async () => {
     const json = await apiFetchGet(
@@ -256,7 +244,6 @@ const SiteAPI = {
     let token = Cookies.get('token');
     
     console.log(token);
-    
     if(token){
       console.log("Entrou aqui");
       //fData.append('Authorization', token);

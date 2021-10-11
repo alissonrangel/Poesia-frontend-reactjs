@@ -33,12 +33,12 @@ function Home() {
       <ul style={{display: "flex", justifyContent:"space-between"}} className="row">
       {
         lista.map((i,k)=>                  
-        <li className="card p-2 m-2" key={k} >          
-          <img className="card-img-top" src={ `${process.env.REACT_APP_URL_NAME}${i.key}`} alt="" />                    
-          <div>Autor: {i.user}</div>
-          <div className="card-title poetryTitle">{i.title}</div>
-          <div><pre className="card-text pre_home">{i.body}</pre></div>
-          <button onClick={()=>handleButton(i.id)} class="btn btn-primary">Leia mais</button>       
+        <li className="li_home card p-2 m-2" key={k} >          
+          {/* <img className="card-img-top" src={ `${process.env.REACT_APP_URL_NAME}${i.key}`} alt="" />                     */}
+          <div style={{display: "flex", justifyContent:"space-between"}}><h6><strong>Autor: {i.user}</strong></h6><h6>{i.data_criacao}</h6></div>
+          <div className="card-title mb-3">{i.title}</div>
+          <div><pre className="card-text pre_home mb-3">{i.body}</pre></div>
+          <button onClick={()=>handleButton(i.id)} className="btn btn-pink2">Leia mais</button>       
         </li>          
         )
       }
